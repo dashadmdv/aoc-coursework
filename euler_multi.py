@@ -2,7 +2,7 @@ import numpy as np
 import multiprocessing
 import time
 
-# Define your ODE function
+# ODE function
 def f(t, y):
     return y - t**2 + 1
 
@@ -59,6 +59,4 @@ if __name__ == '__main__':
 
     execution_time = end - start
     print(f"Execution Time: {execution_time} seconds")
-
-    # You can now plot or analyze the results as needed.
 

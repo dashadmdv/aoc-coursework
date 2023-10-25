@@ -2,7 +2,7 @@ import numpy as np
 import time
 import psutil
 
-# Define your ODE function
+# ODE function
 def f(t, y):
     return y - t**2 + 1
 
@@ -24,7 +24,7 @@ if __name__ == '__main__':
     num_steps = 50000000
     initial_value = 0.5
 
-    # Set CPU affinity to a single core (CPU core 0 in this example)
+    # Set CPU affinity to a single core
     psutil.Process().cpu_affinity([0])
 
     start = time.time()
@@ -33,6 +33,4 @@ if __name__ == '__main__':
 
     execution_time = end - start
     print(f"Execution Time: {execution_time} seconds")
-
-    # You can now plot or analyze the results as needed.
 
