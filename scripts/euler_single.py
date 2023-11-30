@@ -1,6 +1,7 @@
 import numpy as np
 import time
 import psutil
+import matplotlib.pyplot as plt
 
 
 # ODE function
@@ -39,3 +40,6 @@ if __name__ == '__main__':
 
             execution_time = end - start
             print(f"Execution Time: {execution_time} seconds")
+
+    plt.plot(t_values, y_values)
+    plt.show()

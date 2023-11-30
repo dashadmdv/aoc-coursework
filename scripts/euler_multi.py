@@ -1,6 +1,7 @@
 import numpy as np
 import multiprocessing
 import time
+import matplotlib.pyplot as plt
 
 
 # ODE function
@@ -12,7 +13,6 @@ def f(t, y):
 def euler_method(start, end, num_steps, initial_value):
     step_size = (end - start) / num_steps
     t_values = np.linspace(start, end, num_steps+1)[0:-1]
-    print(t_values[-1])
     y_values = np.zeros(num_steps)
     y_values[0] = initial_value
 
@@ -26,10 +26,8 @@ def parallel_euler_method(start, end, num_steps, initial_value, num_processes):
     pool = multiprocessing.Pool(processes=num_processes)
     results = []
 
-    step_size = (end - start) / num_steps
     t_values = np.linspace(start, end, num_steps)
     y0_values = euler_method(start, end, num_processes, initial_value)[1]
-    test = euler_method(start, end, num_processes, initial_value)[0]
 
     # Split the time values for each process
     t_splits = np.array_split(t_values, num_processes)
@@ -47,10 +45,8 @@ def parallel_euler_method(start, end, num_steps, initial_value, num_processes):
 
     for result in results:
         t_values, y_values = result.get()
-        print(t_values[0], y_values[0])
         combined_t_values.extend(t_values)
         combined_y_values.extend(y_values)
-        print(combined_t_values[-1], combined_y_values[-1])
 
     return combined_t_values, combined_y_values
 
@@ -70,3 +66,6 @@ if __name__ == '__main__':
 
             execution_time = end - start
             print(f"Execution Time: {execution_time} seconds")
+
+    plt.plot(t_values, y_values)
+    plt.show()
