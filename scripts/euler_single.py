@@ -2,9 +2,11 @@ import numpy as np
 import time
 import psutil
 
+
 # ODE function
 def f(t, y):
     return y - t**2 + 1
+
 
 # Euler method for solving ODE
 def euler_method(start, end, num_steps, initial_value):
@@ -18,19 +20,22 @@ def euler_method(start, end, num_steps, initial_value):
 
     return t_values, y_values
 
+
 if __name__ == '__main__':
     start_value = 0
     end_value = 2
-    num_steps = int(input("Input step: "))
+    inputs = [10000000, 20000000, 30000000, 40000000, 50000000]
     initial_value = 0.5
 
     # Set CPU affinity to a single core
     psutil.Process().cpu_affinity([0])
 
-    start = time.time()
-    t_values, y_values = euler_method(start_value, end_value, num_steps, initial_value)
-    end = time.time()
+    for num_steps in inputs:
+        print(num_steps)
+        for i in range(10):
+            start = time.time()
+            t_values, y_values = euler_method(start_value, end_value, num_steps, initial_value)
+            end = time.time()
 
-    execution_time = end - start
-    print(f"Execution Time: {execution_time} seconds")
-
+            execution_time = end - start
+            print(f"Execution Time: {execution_time} seconds")
