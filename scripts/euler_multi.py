@@ -54,18 +54,16 @@ def parallel_euler_method(start, end, num_steps, initial_value, num_processes):
 if __name__ == '__main__':
     start_value = 0
     end_value = 2
-    inputs = [10000000, 20000000, 30000000, 40000000, 50000000]
+
+    num_steps = int(input("Input step: "))
     initial_value = 0.5
     num_processes = multiprocessing.cpu_count()
-    for num_steps in inputs:
-        print(num_steps)
-        for i in range(10):
-            start = time.time()
-            t_values, y_values = parallel_euler_method(start_value, end_value, num_steps, initial_value, num_processes)
-            end = time.time()
+    start = time.time()
+    t_values, y_values = parallel_euler_method(start_value, end_value, num_steps, initial_value, num_processes)
+    end = time.time()
 
-            execution_time = end - start
-            print(f"Execution Time: {execution_time} seconds")
+    execution_time = end - start
+    print(f"Execution Time: {execution_time:.6f} seconds")
 
     plt.plot(t_values, y_values)
     plt.show()
